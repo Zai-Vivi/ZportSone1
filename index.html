@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZportSone - Aprende, comprende y vive el deporte</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons para iconografía deportiva -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Montserrat para un toque deportivo y moderno) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos Personalizados (Azul Marino #0A192F, Verde #00E676, Blanco #FFFFFF) -->
+    <style>
+        :root {
+            --azul-marino: #0A192F;
+            --azul-marino-light: #172A45;
+            --verde-deportivo: #00E676;
+            --verde-hover: #00B359;
+            --blanco: #FFFFFF;
+            --gris-claro: #F8F9FA;
+            --texto-oscuro: #212529;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--gris-claro);
+            color: var(--texto-oscuro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Barra de Navegación --- */
+        .navbar {
+            background-color: var(--azul-marino) !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--blanco) !important;
+            letter-spacing: 1px;
+        }
+        .navbar-brand span {
+            color: var(--verde-deportivo);
+        }
+        .nav-link {
+            color: var(--blanco) !important;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--verde-deportivo) !important;
+        }
+
+        /* --- Banner Principal (Hero) --- */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.95), rgba(23, 42, 69, 0.85)), 
+                        url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            color: var(--blanco);
+            padding: 100px 0 80px 0;
+            text-align: center;
+        }
+        .hero-title {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .hero-title span {
+            color: var(--verde-deportivo);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: #E2E8F0;
+        }
+
+        /* --- Botones --- */
+        .btn-verde {
+            background-color: var(--verde-deportivo);
+            color: var(--azul-marino);
+            font-weight: 700;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .btn-verde:hover {
+            background-color: var(--verde-hover);
+            color: var(--blanco);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 230, 118, 0.4);
+        }
+        .btn-outline-blanco {
+            border: 2px solid var(--blanco);
+            color: var(--blanco);
+            font-weight: 700;
+            padding: 10px 26px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-blanco:hover {
+            background-color: var(--blanco);
+            color: var(--azul-marino);
+            transform: translateY(-2px);
+        }
+
+        /* --- Tarjetas de Deportes --- */
+        .card-deporte {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            background-color: var(--blanco);
+        }
+        .card-deporte:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        .card-deporte img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-deporte .card-title {
+            color: var(--azul-marino);
+            font-weight: 700;
+        }
+        .badge-deporte {
+            background-color: var(--azul-marino);
+            color: var(--verde-deportivo);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Sección Eventos Destacados --- */
+        .section-title {
+            color: var(--azul-marino);
+            font-weight: 800;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--verde-deportivo);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .evento-card {
+            background-color: var(--blanco);
+            border-left: 5px solid var(--verde-deportivo);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* --- Sección Principiantes --- */
+        .bg-principiantes {
+            background-color: var(--azul-marino);
+            color: var(--blanco);
+            padding: 70px 0;
+        }
+        .card-concepto {
+            background-color: var(--azul-marino-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .card-concepto:hover {
+            border-color: var(--verde-deportivo);
+        }
+        .icono-concepto {
+            font-size: 2.5rem;
+            color: var(--verde-deportivo);
+            margin-bottom: 15px;
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            background-color: #050C1A;
+            color: #A0AEC0;
+            padding: 30px 0 20px 0;
+            margin-top: auto;
+        }
+        footer a {
+            color: var(--verde-deportivo);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Ajustes Responsivos --- */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-trophy text-verde me-2"></i>Zport<span>Sone</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resultados" id="nav-resultados">Resultados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#academia" id="nav-academia">Academia Deportiva</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. BANNER PRINCIPAL (HERO) -->
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Aprende, comprende y <span>vive el deporte</span></h1>
+            <p class="hero-subtitle">
+                Tu guía definitiva para dominar las reglas, estrategias y momentos clave del Fútbol, la NFL y la Fórmula 1 sin complicaciones.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="#resultados" class="btn btn-verde"><i class="fa-solid fa-chart-line me-2"></i>Ver Resultados</a>
+                <a href="#academia" class="btn btn-outline-blanco"><i class="fa-solid fa-graduation-cap me-2"></i>Ir a Academia</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. TARJETAS DE DEPORTES -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Deportes Principales</h2>
+            <div class="row g-4">
+                <!-- Fútbol -->
+                <div class="col-12 col-md-4">
+                    <div class="card card-deporte">
+                        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Fútbol">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge badge-deporte align-self-start">Fútbol</span>
+                            <h5 class="card-title">Fútbol Soccer</h5>
+                            <p class="card-text text-muted">El deporte rey. Aprende sobre formaciones tácticas, la regla del fuera de juego y la emoción de los torneos más grandes.</p>
+                            <a href="#academia" class="btn btn-sm btn-outline-dark mt-auto align-self-start">Explorar Fútbol</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- NFL -->
+                <div class="col-12 col-md-4">
+                    <div class="card card-deporte">
+                        <img src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Fútbol Americano NFL">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge badge-deporte align-self-start">NFL</span>
+                            <h5 class="card-title">Fútbol Americano</h5>
+                            <p class="card-text text-muted">Estrategia pura sobre el emparrillado. Entiende las yardas por avanzar, las posiciones ofensivas/defensivas y el Super Bowl.</p>
+                            <a href="#academia" class="btn btn-sm btn-outline-dark mt-auto align-self-start">Explorar NFL</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fórmula 1 -->
+                <div class="col-12 col-md-4">
+                    <div class="card card-deporte">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Fórmula 1">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge badge-deporte align-self-start">Fórmula 1</span>
+                            <h5 class="card-title">Fórmula 1</h5>
+                            <p class="card-text text-muted">La cima del automovilismo. Domina la telemetría básica, el uso del DRS, estrategias de neumáticos y paradas en boxes.</p>
+                            <a href="#academia" class="btn btn-sm btn-outline-dark mt-auto align-self-start">Explorar F1</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. EVENTOS DEPORTIVOS DESTACADOS (Contenido Dinámico preparado para API) -->
+    <section id="resultados" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center section-title">Eventos Destacados</h2>
+            <p class="text-center text-muted mb-4">Marcadores y próximos encuentros actualizados en tiempo real.</p>
+            
+            <!-- Contenedor donde se inyectará la información de la API mediante JS -->
+            <div id="eventos-container" class="row justify-content-center">
+                <div class="col-12 text-center py-4" id="cargando-eventos">
+                    <div class="spinner-border text-success" role="status">
+                        <span class="visually-hidden">Cargando eventos...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Cargando eventos en vivo...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SECCIÓN PARA PRINCIPIANTES -->
+    <section class="bg-principiantes" id="academia">
+        <div class="container">
+            <h2 class="text-center section-title text-white">Guía Rápida para Principiantes</h2>
+            <p class="text-center text-light mb-5">Aprende los conceptos clave que todo aficionado debe conocer.</p>
+            
+            <div class="row g-4">
+                <!-- Ejemplo 1: Fuera de lugar -->
+                <div class="col-12 col-md-4">
+                    <div class="card-concepto text-center">
+                        <div class="icono-concepto">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Fuera de Lugar</h4>
+                        <p class="small text-light">
+                            En fútbol, ocurre cuando un jugador atacante está más cerca de la línea de gol rival que el balón y el penúltimo adversario al momento en que se le da el pase.
+                        </p>
+                    </div>
+                </div>
+                <!-- Ejemplo 2: Touchdown -->
+                <div class="col-12 col-md-4">
+                    <div class="card-concepto text-center">
+                        <div class="icono-concepto">
+                            <i class="fa-solid fa-football"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Touchdown</h4>
+                        <p class="small text-light">
+                            En la NFL, es la anotación principal (6 puntos). Se logra cuando un equipo lleva el balón hasta la zona de anotación (Endzone) rival por carrera o pase completado.
+                        </p>
+                    </div>
+                </div>
+                <!-- Ejemplo 3: Pit Stop -->
+                <div class="col-12 col-md-4">
+                    <div class="card-concepto text-center">
+                        <div class="icono-concepto">
+                            <i class="fa-solid fa-flag-checkered"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Pit Stop</h4>
+                        <p class="small text-light">
+                            En F1, es la parada en boxes donde el equipo cambia los neumáticos del monoplaza y ajusta detalles aerodinámicos en menos de 3 segundos para optimizar el ritmo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PIE DE PÁGINA (FOOTER) -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-2 fw-bold text-white">ZportSone &copy; 2026 - Todos los derechos reservados.</p>
+            <p class="small mb-0">Aprende, comprende y vive la pasión del deporte.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap 5 JS Bundle y archivo personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="inicio.js"></script>
+</body>
+</html>
