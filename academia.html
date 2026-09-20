@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportZone Academy - Academia Deportiva</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos compartidos de la aplicación -->
+    <style>
+        :root {
+            --azul-marino: #0A192F;
+            --azul-marino-light: #172A45;
+            --verde-deportivo: #00E676;
+            --verde-hover: #00B359;
+            --blanco: #FFFFFF;
+            --gris-claro: #F8F9FA;
+            --texto-oscuro: #212529;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--gris-claro);
+            color: var(--texto-oscuro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Barra de Navegación --- */
+        .navbar {
+            background-color: var(--azul-marino) !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--blanco) !important;
+            letter-spacing: 1px;
+        }
+        .navbar-brand span {
+            color: var(--verde-deportivo);
+        }
+        .nav-link {
+            color: var(--blanco) !important;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--verde-deportivo) !important;
+        }
+
+        /* --- Encabezado de Página --- */
+        .page-header {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.98), rgba(23, 42, 69, 0.9)), 
+                        url('https://images.unsplash.com/photo-1517649763962-0c623266010b?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            color: var(--blanco);
+            padding: 60px 0 40px 0;
+            text-align: center;
+        }
+
+        /* --- Botones de Categoría --- */
+        .btn-deporte-tab {
+            background-color: var(--azul-marino-light);
+            color: var(--blanco);
+            border: 2px solid transparent;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .btn-deporte-tab:hover {
+            border-color: var(--verde-deportivo);
+            color: var(--verde-deportivo);
+        }
+        .btn-deporte-tab.active {
+            background-color: var(--verde-deportivo);
+            color: var(--azul-marino);
+            border-color: var(--verde-deportivo);
+            box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+        }
+
+        /* --- Tarjetas de Conceptos y Acordeón --- */
+        .card-deporte-section {
+            background-color: var(--blanco);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .card-deporte-header {
+            background-color: var(--azul-marino);
+            color: var(--blanco);
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .card-deporte-header h3 {
+            margin: 0;
+            font-weight: 800;
+        }
+        .card-deporte-header i {
+            font-size: 2rem;
+            color: var(--verde-deportivo);
+        }
+
+        /* Estilos Personalizados Bootstrap Accordion */
+        .accordion-button {
+            font-weight: 700;
+            color: var(--azul-marino);
+            background-color: var(--blanco);
+        }
+        .accordion-button:not(.collapsed) {
+            color: var(--azul-marino);
+            background-color: rgba(0, 230, 118, 0.15);
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--verde-deportivo);
+        }
+        .accordion-body {
+            background-color: #FAFAFA;
+            line-height: 1.7;
+        }
+
+        /* --- Sección Glosario "¿Qué significa?" --- */
+        .glosario-section {
+            background-color: var(--azul-marino);
+            color: var(--blanco);
+            padding: 60px 0;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+        .glosario-card {
+            background-color: var(--azul-marino-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        .glosario-card:hover {
+            border-color: var(--verde-deportivo);
+            transform: translateY(-3px);
+        }
+        .glosario-term {
+            color: var(--verde-deportivo);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .search-box input {
+            border-radius: 25px;
+            padding: 12px 20px;
+            border: 2px solid var(--verde-deportivo);
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            background-color: #050C1A;
+            color: #A0AEC0;
+            padding: 30px 0 20px 0;
+            margin-top: auto;
+        }
+        footer a {
+            color: var(--verde-deportivo);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-trophy text-verde me-2"></i>SportZone <span>Academy</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resultados.html">Resultados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="academia.html">Academia Deportiva</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. ENCABEZADO DE PÁGINA -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4 mb-3">Academia Deportiva</h1>
+            <p class="lead max-w-700 mx-auto opacity-90 mb-4">
+                Tu centro de aprendizaje para dominar las reglas, jugadas clave, posiciones y estrategias de los deportes más pasionales del planeta.
+            </p>
+            
+            <!-- Botones Navegadores entre Deportes -->
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4" id="selector-deportes">
+                <button class="btn btn-deporte-tab active" data-target="todos">
+                    <i class="fa-solid fa-border-all me-2"></i>Todos
+                </button>
+                <button class="btn btn-deporte-tab" data-target="futbol">
+                    <i class="fa-solid fa-futbol me-2"></i>Fútbol
+                </button>
+                <button class="btn btn-deporte-tab" data-target="nfl">
+                    <i class="fa-solid fa-football me-2"></i>NFL
+                </button>
+                <button class="btn btn-deporte-tab" data-target="f1">
+                    <i class="fa-solid fa-flag-checkered me-2"></i>Fórmula 1
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. SECCIÓN PRINCIPAL DE CONCEPTOS POR DEPORTE -->
+    <main class="container py-5">
+        
+        <!-- FÚTBOL -->
+        <section class="card-deporte-section bloque-deporte" id="deporte-futbol">
+            <div class="card-deporte-header">
+                <i class="fa-solid fa-futbol"></i>
+                <div>
+                    <h3>Fútbol Soccer</h3>
+                    <small class="text-light opacity-75">Fundamentos, táctica y reglas esenciales</small>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="accordion accordion-flush" id="accordionFutbol">
+                    
+                    <!-- Posiciones -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFut1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFut1">
+                                <i class="fa-solid fa-users me-2 text-success"></i> Posiciones en la Cancha
+                            </button>
+                        </h2>
+                        <div id="collapseFut1" class="accordion-collapse collapse" data-bs-parent="#accordionFutbol">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><strong>Portero (Guardameta):</strong> El único jugador autorizado a usar las manos dentro de su área. Su objetivo principal es evitar el gol.</li>
+                                    <li><strong>Defensas (Centrales y Laterales):</strong> Protegen el área propia. Los laterales además apoyan los ataques por las bandas.</li>
+                                    <li><strong>Mediocampistas (Volantes/Pivotes):</strong> El motor del equipo. Recuperan el balón y construyen la transición ofensiva.</li>
+                                    <li><strong>Delanteros (Extremos y Centrodelantero):</strong> Encargados de definir las jugadas y anotar los goles.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formaciones -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFut2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFut2">
+                                <i class="fa-solid fa-sitemap me-2 text-success"></i> Formaciones Tácticas
+                            </button>
+                        </h2>
+                        <div id="collapseFut2" class="accordion-collapse collapse" data-bs-parent="#accordionFutbol">
+                            <div class="accordion-body">
+                                <p>La alineación determina cómo se distribuyen los 10 jugadores de campo:</p>
+                                <ul>
+                                    <li><strong>4-3-3:</strong> Estilo ofensivo con gran amplitud por las bandas mediante dos extremos abiertos.</li>
+                                    <li><strong>4-4-2:</strong> La formación clásica, equilibrada en defensa y mediocampo con dos atacantes en punta.</li>
+                                    <li><strong>3-5-2:</strong> Utiliza tres defensas centrales y carrileros que cubren toda la banda para dominar la posesión.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fuera de Lugar -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFut3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFut3">
+                                <i class="fa-solid fa-flag me-2 text-success"></i> La Regla del Fuera de Lugar (Offside)
+                            </button>
+                        </h2>
+                        <div id="collapseFut3" class="accordion-collapse collapse" data-bs-parent="#accordionFutbol">
+                            <div class="accordion-body">
+                                <p>Un atacante está en <strong>fuera de lugar</strong> si se encuentra más cerca de la línea de gol rival que el balón y el penúltimo adversario (usualmente el último defensa antes del arquero) al momento preciso en que un compañero le pasa el balón.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faltas y Tarjetas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFut4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFut4">
+                                <i class="fa-solid fa-copy me-2 text-success"></i> Faltas, Tarjetas y Estrategias
+                            </button>
+                        </h2>
+                        <div id="collapseFut4" class="accordion-collapse collapse" data-bs-parent="#accordionFutbol">
+                            <div class="accordion-body">
+                                <p><strong>Tarjetas:</strong> La <em>Tarjeta Amarilla</em> sirve como advertencia por faltas reiteradas o antideportivas. La <em>Tarjeta Roja</em> implica expulsión inmediata (acumular 2 amarillas equivale a una roja).</p>
+                                <p><strong>Estrategias Clave:</strong> La <em>Presión Alta</em> busca asfixiar la salida del rival cerca de su área, mientras que el <em>Contraataque</em> aprovecha los espacios cedidos al recuperar el balón rápidamente.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- NFL -->
+        <section class="card-deporte-section bloque-deporte" id="deporte-nfl">
+            <div class="card-deporte-header">
+                <i class="fa-solid fa-football"></i>
+                <div>
+                    <h3>Fútbol Americano (NFL)</h3>
+                    <small class="text-light opacity-75">Dominio territorial, yardas y anotaciones</small>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="accordion accordion-flush" id="accordionNFL">
+                    
+                    <!-- Touchdown y Puntuación -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNFL1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNFL1">
+                                <i class="fa-solid fa-star me-2 text-success"></i> Touchdown y Sistema de Puntuación
+                            </button>
+                        </h2>
+                        <div id="collapseNFL1" class="accordion-collapse collapse" data-bs-parent="#accordionNFL">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><strong>Touchdown (6 pts):</strong> Cruzar o capturar el balón dentro de la zona de anotación (Endzone) rival.</li>
+                                    <li><strong>Punto Extra (1 pt):</strong> Patada a gol tras anotar un touchdown.</li>
+                                    <li><strong>Conversión de 2 Puntos (2 pts):</strong> Jugada directa desde la yarda 2 tras un touchdown.</li>
+                                    <li><strong>Gol de Campo / Field Goal (3 pts):</strong> Anotar mediante patada entre los postes cuando no se alcanza la Endzone.</li>
+                                    <li><strong>Safety (2 pts):</strong> Plaquear al atacante rival dentro de su propia zona de anotación.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Downs y Yardas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNFL2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNFL2">
+                                <i class="fa-solid fa-ruler-horizontal me-2 text-success"></i> Oportunidades (Downs) y Yardaje
+                            </button>
+                        </h2>
+                        <div id="collapseNFL2" class="accordion-collapse collapse" data-bs-parent="#accordionNFL">
+                            <div class="accordion-body">
+                                <p>El equipo ofensivo tiene <strong>4 oportunidades (downs)</strong> para avanzar al menos <strong>10 yardas</strong> por carrera o pase. Si lo logra, consigue un <em>1st & 10 (1er y diez)</em>, reiniciando la cuenta de downs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Posiciones -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingNFL3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNFL3">
+                                <i class="fa-solid fa-shield-halved me-2 text-success"></i> Posiciones Principales
+                            </button>
+                        </h2>
+                        <div id="collapseNFL3" class="accordion-collapse collapse" data-bs-parent="#accordionNFL">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><strong>Quarterback (QB):</strong> El mariscal de campo. Líder táctico que decide si entrega el balón por carrera o envía un pase.</li>
+                                    <li><strong>Running Back (RB):</strong> El corredor especializado en abrirse paso entre la línea defensiva.</li>
+                                    <li><strong>Wide Receiver (WR):</strong> Receptores veloces encargados de capturar los pases del QB.</li>
+                                    <li><strong>Línea Ofensiva / Defensiva:</strong> Bloqueadores que protegen al QB o buscan atraparlo (Sack).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FÓRMULA 1 -->
+        <section class="card-deporte-section bloque-deporte" id="deporte-f1">
+            <div class="card-deporte-header">
+                <i class="fa-solid fa-flag-checkered"></i>
+                <div>
+                    <h3>Fórmula 1</h3>
+                    <small class="text-light opacity-75">Velocidad, estrategia y tecnología de punta</small>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="accordion accordion-flush" id="accordionF1">
+                    
+                    <!-- Pole Position y Parrilla -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingF1_1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseF1_1">
+                                <i class="fa-solid fa-trophy me-2 text-success"></i> Pole Position y Parrilla de Salida
+                            </button>
+                        </h2>
+                        <div id="collapseF1_1" class="accordion-collapse collapse" data-bs-parent="#accordionF1">
+                            <div class="accordion-body">
+                                <p>La <strong>Parrilla de Salida</strong> se determina durante la sesión de <em>Clasificación (Qualy)</em> del sábado. El piloto que registra el tiempo de vuelta más rápido obtiene la <strong>Pole Position</strong>, garantizando el primer lugar en la largada del domingo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pit Stop y Neumáticos -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingF1_2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseF1_2">
+                                <i class="fa-solid fa-stopwatch me-2 text-success"></i> Pit Stops y Compuestos de Neumáticos
+                            </button>
+                        </h2>
+                        <div id="collapseF1_2" class="accordion-collapse collapse" data-bs-parent="#accordionF1">
+                            <div class="accordion-body">
+                                <p><strong>Pit Stop:</strong> Detención en boxes donde hasta 20 mecánicos reemplazan las 4 ruedas en alrededor de 2 segundos.</p>
+                                <p><strong>Neumáticos lisos (Slicks):</strong></p>
+                                <ul>
+                                    <li><span class="text-danger fw-bold">Blandos (Rojos):</span> Mayor agarre y velocidad, pero se desgastan rápido.</li>
+                                    <li><span class="text-warning fw-bold">Medios (Amarillos):</span> Equilibrio ideal entre duración y ritmo.</li>
+                                    <li><span class="text-secondary fw-bold">Duros (Blancos):</span> Menor velocidad inmediata, pero alta durabilidad.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banderas de la F1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingF1_3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseF1_3">
+                                <i class="fa-solid fa-flags-curling me-2 text-success"></i> Código de Banderas
+                            </button>
+                        </h2>
+                        <div id="collapseF1_3" class="accordion-collapse collapse" data-bs-parent="#accordionF1">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li><strong>Bandera Verde:</strong> Pista despejada, velocidad normal de carrera.</li>
+                                    <li><strong>Bandera Amarilla:</strong> Peligro en pista. Prohibido adelantar y reducir velocidad.</li>
+                                    <li><strong>Bandera Roja:</strong> Sesión o carrera suspendida inmediatamente por accidente grave o clima extremo.</li>
+                                    <li><strong>Bandera Azul:</strong> Indica a un auto rezagado que debe dejar pasar a un líder más rápido.</li>
+                                    <li><strong>Bandera a Cuadros:</strong> Fin de la sesión o carrera.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SECCIÓN GLOSARIO: ¿QUÉ SIGNIFICA? -->
+        <section class="glosario-section">
+            <div class="container text-center">
+                <h2 class="fw-bold mb-2 text-white">¿Qué significa?</h2>
+                <p class="text-light opacity-75 mb-4">El diccionario deportivo rápido para principiantes. Encuentra definiciones al instante.</p>
+                
+                <!-- Buscador del Glosario -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-12 col-md-6 search-box">
+                        <input type="text" id="buscador-glosario" class="form-control form-control-lg text-center" placeholder="Buscar concepto (ej: DRS, VAR, Intercepción)...">
+                    </div>
+                </div>
+
+                <!-- Tarjetas del Glosario Grid -->
+                <div class="row g-4 text-start" id="contenedor-glosario">
+                    <!-- VAR -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-tv me-2"></i>VAR (Fútbol)</div>
+                            <p class="small text-light mb-0">Árbitro de Asistente de Video. Revisa jugadas decisivas como goles, penales, tarjetas rojas directas e identidad errónea.</p>
+                        </div>
+                    </div>
+                    <!-- DRS -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-gauge-high me-2"></i>DRS (Fórmula 1)</div>
+                            <p class="small text-light mb-0">Sistema de Reducción de Arrastre. Abre un alerón trasero para reducir resistencia del aire y ganar velocidad al adelantar.</p>
+                        </div>
+                    </div>
+                    <!-- Intercepción -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-hand-back-fist me-2"></i>Intercepción (NFL)</div>
+                            <p class="small text-light mb-0">Ocurre cuando un jugador defensivo atrapa en el aire un pase enviado por el mariscal de campo rival.</p>
+                        </div>
+                    </div>
+                    <!-- Hat-Trick -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-hat-wizard me-2"></i>Hat-Trick (General)</div>
+                            <p class="small text-light mb-0">Anotar tres goles en un mismo partido de fútbol, o ganar Qualy, Vuelta Rápida y Carrera en F1.</p>
+                        </div>
+                    </div>
+                    <!-- Sack -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-user-slash me-2"></i>Sack / Captura (NFL)</div>
+                            <p class="small text-light mb-0">Plaquear al Quarterback detrás de su línea de origen antes de que pueda lanzar o entregar el balón.</p>
+                        </div>
+                    </div>
+                    <!-- Undercut -->
+                    <div class="col-12 col-md-4 item-glosario">
+                        <div class="glosario-card">
+                            <div class="glosario-term"><i class="fa-solid fa-arrows-rotate me-2"></i>Undercut (Fórmula 1)</div>
+                            <p class="small text-light mb-0">Estrategia de entrar a boxes antes que el rival para aprovechar neumáticos nuevos y adelantarlo al salir.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. PIE DE PÁGINA (FOOTER) -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-2 fw-bold text-white">SportZone Academy &copy; 2026 - Todos los derechos reservados.</p>
+            <p class="small mb-0">Aprende, comprende y vive la pasión del deporte.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap 5 JS Bundle y Script Personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="academia.js"></script>
+</body>
+</html>
